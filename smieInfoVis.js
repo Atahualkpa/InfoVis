@@ -93,18 +93,15 @@ function dataSetGenerator() {
    console.log(window.innerWidth)
    console.log(window.innerHeight)
    while (i < 30) {
-    var cx = Math.round(Math.random() * (window.innerWidth));
-    var cy = Math.round(Math.random() * (window.innerHeight));
-    var r = Math.floor((Math.random() * 30) + 30);
+      var r = Math.floor((Math.random() * 30) + 30);
+      var cx = Math.round(Math.random() * (window.innerWidth)) + 2 * r
+      var cy = Math.round(Math.random() * (window.innerHeight)) + 2 * r
 
-    if(cx<10){
-      cx += 5*r 
-    }
-    if(cy<10)
-      cy = cy+ 5*r
-    console.log(cx)
-    console.log(cy)
-    smile["x"] = cx ;
+      if ((cx + r) > window.innerWidth)
+         cx = cx - 2 * (window.innerWidth / 3)
+      if ((cy + r) > window.innerHeight)
+         cy = cy - 2 * (window.innerHeight / 3)
+      smile["x"] = cx;
       smile["y"] = cy
       smile["r"] = r;
       smile["i"] = i;
@@ -131,9 +128,16 @@ function smileSad(d) {
 }
 
 function drawSingleSmile(d) {
-   var translateX = Math.round(Math.random() * (window.innerWidth)) - d.r;
-   var translateY = Math.round(Math.random() * (window.innerHeight)) - d.r;
-   
+   var translateX = (Math.round(Math.random() * (window.innerWidth)) + 2 * d.r)-d.x
+   var translateY = (Math.round(Math.random() * (window.innerHeight)) + 2 * d.r)-d.y
+   console.log(d)
+   if ((translateX + d.r) > window.innerWidth)
+      translateX = translateX - 2 * (window.innerWidth / 3)
+   if ((translateY + d.r) > window.innerHeight)
+      translateY = translateY - 2 * (window.innerHeight / 3)
+
+   console.log(translateX)
+   console.log(translateY)
    setTimeout(function(d) {
 
       d3.select("#group" + d.i).attr("transform", "translate(" + translateX + "," + translateY + ")")
