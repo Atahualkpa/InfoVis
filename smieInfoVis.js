@@ -93,7 +93,7 @@ function dataSetGenerator() {
    console.log(window.innerWidth)
    console.log(window.innerHeight)
    while (i < 30) {
-      var r = Math.floor((Math.random() * 30) + 30);
+      var r = Math.floor((Math.random() * 60) + 10);
       var cx = Math.round(Math.random() * (window.innerWidth)) + 2 * r
       var cy = Math.round(Math.random() * (window.innerHeight)) + 2 * r
 
