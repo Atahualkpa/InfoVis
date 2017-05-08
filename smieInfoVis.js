@@ -75,17 +75,6 @@ var smileHappy = infoSmile
    .style("stroke", "black")
    .style("fill", "transparent");
 
-// var movimenSmile = d3.call(transition())
-
-function transition() {
-   d3.selectAll("g").transition()
-      .duration(1000)
-      .ease("linear")
-      .attr('cx', 300 * (1 + Math.random() / 2))
-      .attr('cy', 100 * (1 + Math.random() / 2))
-      .each("end", transition);
-};
-
 function dataSetGenerator() {
    var dataSet = [];
    var smile = {}
@@ -128,16 +117,8 @@ function smileSad(d) {
 }
 
 function drawSingleSmile(d) {
-   var translateX = (Math.round(Math.random() * (window.innerWidth)) + 2 * d.r)-d.x
-   var translateY = (Math.round(Math.random() * (window.innerHeight)) + 2 * d.r)-d.y
-   console.log(d)
-   if ((translateX + d.r) > window.innerWidth)
-      translateX = translateX - 2 * (window.innerWidth / 3)
-   if ((translateY + d.r) > window.innerHeight)
-      translateY = translateY - 2 * (window.innerHeight / 3)
-
-   console.log(translateX)
-   console.log(translateY)
+   var translateX = (Math.round(Math.random() * (window.innerWidth-(5*d.r))))-d.x
+   var translateY = (Math.round(Math.random() * (window.innerHeight-(5*d.r))))-d.y
    setTimeout(function(d) {
 
       d3.select("#group" + d.i).attr("transform", "translate(" + translateX + "," + translateY + ")")
@@ -154,12 +135,5 @@ function drawSingleSmile(d) {
          })
          .style("stroke", "black")
          .style("fill", "transparent");
-      // d3.select("#group" + (d.i)).transition()
-      //         .duration(1000)
-      //         .ease("linear")
-      //         .attr('cx',  300 * (1 + Math.random()/2))
-      //         .attr('cy',  100 * (1 + Math.random()/2))
-      // .each("end", transition);
-
    }, 1000, d, translateX, translateY);
 }
